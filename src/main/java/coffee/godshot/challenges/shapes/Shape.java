@@ -112,36 +112,13 @@ public class Shape
         int x = point.getX();
         int y = point.getY();
 
-        //0
-        if(getValue(x+1, y) == 0)
-            value++;
-        //45
-        if(getValue(x+1, y-1) == 0)
-            value++;
-
-        //90
-        if(getValue(x, y-1) == 0)
-            value++;
-
-        //135
-        if(getValue(x-1, y-1) == 0)
-            value++;
-
-        // 180
-        if(getValue(x-1, y) == 0)
-            value++;
-
-        //225
-        if(getValue(x-1, y+1)  == 0)
-            value++;
-
-        //270
-        if(getValue(x, y+1) == 0)
-            value++;
-
-        //315
-        if(getValue(x+1, y+1) == 0)
-            value++;
+        for(int xv = -1; xv <= 1; xv++) {
+            for(int yv = -1; yv <= 1; yv++) {
+                if(xv == 0 && yv == 0) continue;
+                if(getValue(x+xv, y+yv) == 0)
+                    value++;
+            }
+        }
 
         return value;
     }
@@ -180,72 +157,18 @@ public class Shape
 
         Point point = new Point();
 
-        //0
-        point.setX(currentPt.getX() + 1);
-        point.setY(currentPt.getY());
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
+        for(int xv = -1; xv <= 1; xv++) {
+            for(int yv = -1; yv <= 1; yv++) {
 
+                if(yv == 0 && xv == 0) continue;
 
-        //45
-        point.setX(currentPt.getX() + 1);
-        point.setY(currentPt.getY() - 1);
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
-
-        //90
-        point.setX(currentPt.getX());
-        point.setY(currentPt.getY() - 1);
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
-
-
-        //135
-        point.setX(currentPt.getX() - 1);
-        point.setY(currentPt.getY() - 1);
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
-
-
-        //180
-        point.setX(currentPt.getX() - 1);
-        point.setY(currentPt.getY());
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
-
-
-        //225
-        point.setX(currentPt.getX() - 1);
-        point.setY(currentPt.getY() + 1);
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
-
-        //270
-        point.setX(currentPt.getX());
-        point.setY(currentPt.getY() + 1);
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
-            point = new Point();
-        }
-
-
-        //315
-        point.setX(currentPt.getX() + 1);
-        point.setY(currentPt.getY() + 1);
-        if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
-            points.add(point);
+                point.setX(currentPt.getX()+xv);
+                point.setY(currentPt.getY()+yv);
+                if(getValue(point.getX(), point.getY()) != 0 && !boundary.contains(point)) {
+                    points.add(point);
+                    point = new Point();
+                }
+            }
         }
 
         return points;

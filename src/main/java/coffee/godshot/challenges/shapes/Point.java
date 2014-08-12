@@ -74,38 +74,8 @@ public class Point {
      * @return true if point is adjacent to this point
      */
     public boolean isAdjacent(Point a) {
-        //0
-        if(getX()+1 == a.getX() && getY() == a.getY())
-            return true;
 
-        //45
-        if(getX()+1 == a.getX() && getY()+1 == a.getY())
-            return true;
+        return Math.abs(getX() - a.getX()) <= 1 && Math.abs(getY() - a.getY()) <= 1;
 
-        //90
-        if(getX() == a.getX() && getY()+1 == a.getY())
-            return true;
-
-        //135
-        if(getX()-1 == a.getX() && getY()+1 == a.getY())
-            return true;
-
-        //180
-        if(getX()-1 == a.getX() && getY() == a.getY())
-            return true;
-
-        //225
-        if(getX()-1 == a.getX() && getY()-1 == a.getY())
-            return true;
-
-        //270
-        if(getX() == a.getX() && getY()-1 == a.getY())
-            return true;
-
-        //315
-        if(getX()+1 == a.getX() && getY()-1 == a.getY())
-            return true;
-
-        return false;
     }
 }
